@@ -1,6 +1,6 @@
 require("dotenv").config()
 const express = require('express');
-const {randomUUID} = require('crypto');
+// const {randomUUID} = require('crypto');
 const app = express();
 const db=require('./database/db')
 const cors = require('cors')
@@ -26,7 +26,7 @@ app.use('/api/widthdraw', require('./routes/Withdraw'))
 app.use('/uploads', express.static('uploads'));
 app.use('/api', require('./routes/User_Approve'))
 
-console.log(crypto.randomUUID());
+// console.log(crypto.randomUUID());
 app.listen(process.env.PORT, () => {
     console.log(`Server Started on PORT : ${process.env.PORT}`)
 })
