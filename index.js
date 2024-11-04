@@ -21,8 +21,7 @@ app.use('/api', require('./routes/Questions'));
 app.use('/api', require('./routes/Point'))
 app.use('/api/widthdraw', require('./routes/Withdraw'))
 
-// Approve 
-// Serve static files from the 'uploads' directory
+
 app.use('/uploads', express.static('uploads'));
 app.use('/api', require('./routes/User_Approve'))
 
