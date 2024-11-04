@@ -2,9 +2,9 @@ require("dotenv").config()
 const express = require('express');
 // const {randomUUID} = require('crypto');
 const app = express();
-// const db=require('./database/db')
+const db=require('./database/db')
 const cors = require('cors')
-// db()
+db()
 
 app.use(express.json())
 app.use(cors());
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req,res)=>res.send("up and running"))
 app.get('/users', (req,res)=>res.json({data:"we are users"}))
 // // ***************** USER ***************** //
-// app.use('/api', require('./routes/User'))
+app.use('/api', require('./routes/User'))
 
 // // Task
 // app.use('/api', require('./routes/Questions'));
