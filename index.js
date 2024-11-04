@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
  
 // ***************** USER ***************** //
 app.use('/api', require('./routes/User'))
+app.get('/', (req,res)=>res.send("up and running"))
 
 // Task
 app.use('/api', require('./routes/Questions'));
