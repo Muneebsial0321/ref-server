@@ -45,16 +45,18 @@ const createWithdrawReq = async (req, res) => {
 
 const acceptWithdrawReq = async (req, res) => {
     try {
-        const withDraw = await WidthDraw.findById(req.params.id)
+        const withDraw = await Model.updateOne({ _id: id }, { $set: { status: "approved" } });
+        console.log({withDraw})
+        // const withDraw = await WidthDraw.findById(req.params.id)
         // set points to zero
-        const pointToWidthDraw = +withDraw.pointRequested
-        const user = await User.findById(withDraw.userId)
-        const userPoints = await Points.findOne({ userId: withDraw.userId })
-        console.log({ pointToWidthDraw, userPoints, user })
+        // const pointToWidthDraw = +withDraw.pointRequested
+        // const user = await User.findById(withDraw.userId)
+        // const userPoints = await Points.findOne({ userId: withDraw.userId })
+        // console.log({ pointToWidthDraw, userPoints, user })
         // set req to accepted
-        if (userPoints > pointToWidthDraw) {
-            console.log("can withdraw")
-        }
+        // if (userPoints > pointToWidthDraw) {
+        //     console.log("can withdraw")
+        // }
         req.json({ message: "success", withDraw })
     } catch (error) {
         console.log(error)

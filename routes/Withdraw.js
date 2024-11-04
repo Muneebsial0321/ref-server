@@ -5,7 +5,7 @@ const { createWithdrawReq, acceptWithdrawReq, getAllReqs,getMyReqs} = require('.
 router.post('/', createWithdrawReq);
 
 // Route for accepting a withdrawal request
-router.put('/:id/accept', acceptWithdrawReq);
+router.put('/:id', acceptWithdrawReq);
 
 // Route for getting all withdrawal requests
 router.get('/', getAllReqs);
