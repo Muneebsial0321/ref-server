@@ -261,12 +261,17 @@ const getAllReferals = async (req, res) => {
         res.status(500).json({ msg: err.message });
     }
 };
-
+ 
 const getMyReferals = async(req,res) =>{
+    console.log(req.params.id)  
     const ref = await Referral.findOne({userId:req.params.id})
-    const users = await UserModal.find({referral:ref.referral})
-    const filteredData = users.filter((e)=>e!=null)
-    res.json({count:filteredData.length,data:filteredData})
+    console.log({ref})
+    if(ref){
+        const users = await UserModal.find({referral:ref.referral})
+        const filteredData = users.filter((e)=>e!=null)
+        return   res.json({count:filteredData.length,data:filteredData})
+    }
+    res.json({count:0,data:[]})
 }
 
 const getAllBlockedUsers = async (req,res)=>{
