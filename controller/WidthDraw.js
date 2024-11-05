@@ -44,8 +44,9 @@ const createWithdrawReq = async (req, res) => {
 
 
 const acceptWithdrawReq = async (req, res) => {
+    console.log("approving user")
     try {
-        const withDraw = await Model.updateOne({ _id: id }, { $set: { status: "approved" } });
+        const withDraw = await Model.updateOne({ _id: req.params.id }, { $set: { status: "approved" } });
         console.log({withDraw})
         // const withDraw = await WidthDraw.findById(req.params.id)
         // set points to zero
