@@ -14,7 +14,7 @@ var transporter = nodemailer.createTransport({
   secure: false, // Set to true for port 465, but use false for 587
   auth: {
       user: "mcorvit100@gmail.com",
-      pass:  "Corvit@786"
+      pass:  ""
   },  // Increase the connection and sending timeout settings
   connectionTimeout: 10000, // 10 seconds
   greetingTimeout: 10000, // 10 seconds

@@ -3,10 +3,10 @@ console.log("sending email")
 
 nodemailer.sendEmail({
   auth: {
-    user: 'muneebS0321@outlook.com', // Your Hotmail email address
-    pass: 'Muneeb@0321' // Your Hotmail password or app-specific password
+    user: '', // Your Hotmail email address
+    pass: '' // Your Hotmail password or app-specific password
   },
-  from: 'muneebS0321@outlook.com',
+  from: '',
   to: 'muneeburrehmansial032168@gmail.com',
   subject: 'Password Reset OTP',
 //   text: 'Your OTP for password reset is 123456.',
