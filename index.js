@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true })); 
 
  
-app.get('/', (req,res)=>res.send(`up and running ${process.env.MONGO_URL}`))
+app.get('/', (req,res)=>res.send(`up and running `))
 app.get('/users', (req,res)=>res.json({data:"we are users"}))
 // // ***************** USER ***************** //
 app.use('/api', require('./routes/User'))
