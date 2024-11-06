@@ -1,26 +1,42 @@
-const nodemailer = require('nodejs-nodemailer-outlook');
-console.log("sending email")
+require('dotenv').config();
+const nodemailer = require('nodemailer');
 
-nodemailer.sendEmail({
+console.log("sending mail");
+
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',  // Correct SMTP host for Outlook
+//   host: 'smtp-mail.outlook.com',  // Correct SMTP host for Outlook
+  port: 587,                      // Use port 587 for TLS
+  secure: false,                  // Use false for TLS on port 587
   auth: {
-    user: '', // Your Hotmail email address
-    pass: '' // Your Hotmail password or app-specific password
+    user: process.env.EMAIL,
+    pass: process.env.PASS
   },
-  from: '',
-  to: 'muneeburrehmansial032168@gmail.com',
-  subject: 'Password Reset OTP',
-//   text: 'Your OTP for password reset is 123456.',
-  // If you want to send HTML content, you can use the 'html' property instead
-  html: '<p>Your OTP for password reset is <strong>123456</strong>.</p>',
-  debug: true, // Enable debug output
-  // Optional: add attachments
-  // attachments: [
-  //   { filename: 'file.txt', path: '/path/to/file.txt' }
-  // ],
-}, (err, info) => {
-  if (err) {
-    return console.log('Error occurred:', err);
-  }
-  console.log('Email sent:', info);
+  tls: {
+    rejectUnauthorized: false // Bypass SSL verification if necessary (for testing)
+  },
+//   connectionTimeout: 50000 // 20 seconds
 });
-console.log("funcation added")
+
+console.log({
+  email: process.env.EMAIL,
+//   pass: process.env.PASS,
+});
+
+console.log("transport created");
+const mailOptions = {
+  from: process.env.EMAIL,
+  to: 'muneeburrehmansial0321@gmail.com',
+  subject: 'Test Email from Outlook using Nodemailer',
+  text: 'Hello from Nodemailer and Outlook!'
+};
+
+console.log("sending now");
+transporter.sendMail(mailOptions, (error, info) => {
+  if (error) {
+    console.error('Error sending email:', error);
+  } else {
+    console.log('Email sent:', info);
+  }
+});

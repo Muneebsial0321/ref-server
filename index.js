@@ -26,6 +26,7 @@ app.use('/api/widthdraw', require('./routes/Withdraw'))
 
 app.use('/uploads', express.static('uploads'));
 app.use('/api', require('./routes/User_Approve'))
+app.use('/api/reset', require('./routes/reset'))
 
 app.listen(process.env.PORT, () => {
     console.log(`Server Started on PORT : ${process.env.PORT}`)

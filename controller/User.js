@@ -44,6 +44,7 @@ const handleNewUser = async (req, res) => {
             userId: User._id,
             point: 100
         });
+        console.log({user})
         res.status(201).json({ User })
     }
     catch (error) {
@@ -75,13 +76,14 @@ const handleLogin = async (req, res) => {
         // console.log({User})
 
         if (!User) {
-            return res.status(404).json({ status: 'error', msg: "User not found" });
+            return res.json({ status: 'error', msg: "User not found" });
         }
 
         const isPasswordValid = await bcrypt.compare(req.body.password, User.password);
+        console.log({isPasswordValid})
 
         if (!isPasswordValid) {
-            return res.status(400).json({ status: 'error', msg: "Invalid credentials" });
+            return res.json({ status: 'error', msg: "Invalid credentials" });
         }
 
         const userPoints = await Point.findOne({ userId: User._id });
