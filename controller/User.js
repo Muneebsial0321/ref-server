@@ -10,12 +10,15 @@ const JWT_SECRET = "12@345%6789";
 
 // Create New User 
 const handleNewUser = async (req, res) => {
-    console.log("siging in")
-    // console.log({findUser:req.body})
+    console.log(req.body)
     try {
+
+        const referralId = crypto.randomBytes(4).toString('hex');
         const approved = "false";
         const blocked = "false";
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
         const User = await UserModal.create({
             fname: req.body.fname,
             lname: req.body.lname,
@@ -26,26 +29,16 @@ const handleNewUser = async (req, res) => {
             isBlocked: blocked
         })
 
-        if (req.body.referral!=null) {
-            console.log(req.body.referral)
-            const findUser = await Referral.findOne(
-                { referral: req.body.referral }  // Search criteria
-            );
-            // 0cd40be7-3e76-47b8-93c2-fdb0f7c9bf13
-            const updatePoints = await Point.findOneAndUpdate(
-                { userId: findUser.userId },  
-                { $inc: { point: 85 } },  
-                { new: true }  
-            )
-            console.log({ findUser, updatePoints })
-
-        }
+        const userReferral = await Referral.create({
+            userId: User._id,
+            referral: referralId
+        });
         const newPoint = await Point.create({
             userId: User._id,
             point: 100
         });
-        console.log({user})
-        res.status(201).json({ User })
+
+        res.status(201).json({ User, points: newPoint, referral: userReferral })
     }
     catch (error) {
         console.log(error)
